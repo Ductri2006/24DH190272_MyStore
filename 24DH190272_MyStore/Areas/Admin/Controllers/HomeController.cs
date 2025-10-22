@@ -9,7 +9,7 @@ namespace _24DH190272_MyStore.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         // GET: Admin/Home
-        public ActionResult Index()
+        public ActionResult Indexx()
         {
             return View();
         }

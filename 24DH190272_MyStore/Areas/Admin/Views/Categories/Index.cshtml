@@ -1,0 +1,40 @@
+﻿@model IEnumerable<_24DH190272_MyStore.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success">Danh sách danh mục sản phẩm</h2>
+
+     <table class="table bg-info col-lg-12 col-md-6 col-sm-3">
+        <tr>
+            <th  class="bg-success col-lg-8 col-md-4 col-sm-2">
+                @*@Html.DisplayNameFor(model => model.CategoryName)*@
+                TÊN DANH MỤC
+            </th>
+            <th  class="bg-success col-lg-4  col-md-2 col-sm-1"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Cập nhật", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })  @*btn btn-primary: cho nút có phông xanh*@
+                   
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })
+                </td>
+            </tr>
+        }
+
+     </table>
+
+     <p>
+         @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary btn-sm" })
+        
+         @*btn btn-primary: cho nút có phông xanh*@
+         @*btn-sm: là 1 class của bootstrap để cỡ chữ nhỏ hơn*@
+     </p>
