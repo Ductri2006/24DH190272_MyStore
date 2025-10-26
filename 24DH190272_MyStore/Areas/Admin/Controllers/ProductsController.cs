@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _24DH190272_MyStore.Models;
+using PagedList;
 
 namespace _24DH190272_MyStore.Areas.Admin.Controllers
 {
@@ -15,10 +16,44 @@ namespace _24DH190272_MyStore.Areas.Admin.Controllers
         private MyStoreEntities db = new MyStoreEntities();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "price" ? "price_desc" : "price";
+
             var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+
+            // Tìm kiếm
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.ProductName.Contains(searchString)
+                    || p.ProductDescription.Contains(searchString)
+                    || p.Category.CategoryName.Contains(searchString));
+            }
+
+            // Sắp xếp
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.ProductName);
+                    break;
+                case "price":
+                    products = products.OrderBy(p => p.ProductPrice);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.ProductPrice);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.ProductName);
+                    break;
+            }
+
+            // Phân trang
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Products/Details/5
@@ -128,5 +163,7 @@ namespace _24DH190272_MyStore.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }
