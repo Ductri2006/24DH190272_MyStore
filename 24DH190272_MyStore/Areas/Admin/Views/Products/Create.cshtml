@@ -1,0 +1,25 @@
+﻿@model _24DH190272_MyStore.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success text-center p-2 rounded">Thêm sản phẩm mới</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.Partial("PVCreateEditProduct", Model)
+
+        <div class="form-group mt-3">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+    </div>
+}
+

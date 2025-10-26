@@ -7,13 +7,13 @@
 
 <h2 class="bg-success">Danh sách danh mục sản phẩm</h2>
 
-     <table class="table bg-info col-lg-12 col-md-6 col-sm-3">
+     <table class="table bg-info col-md-6">
         <tr>
-            <th  class="bg-success col-lg-8 col-md-4 col-sm-2">
+            <th  class="bg-success col-md-4">
                 @*@Html.DisplayNameFor(model => model.CategoryName)*@
                 TÊN DANH MỤC
             </th>
-            <th  class="bg-success col-lg-4  col-md-2 col-sm-1"></th>
+            <th  class="bg-success col-md-2"></th>
         </tr>
 
         @foreach (var item in Model)
@@ -23,7 +23,7 @@
                     @Html.DisplayFor(modelItem => item.CategoryName)
                 </td>
                 <td>
-                    @Html.ActionLink("Cập nhật", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })  @*btn btn-primary: cho nút có phông xanh*@
+                    @Html.ActionLink("sửa", "Edit", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })  @*btn btn-primary: cho nút có phông xanh*@
                    
                     @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID }, new { @class = "btn btn-primary btn-sm" })
                 </td>
@@ -33,7 +33,7 @@
      </table>
 
      <p>
-         @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary btn-sm" })
+         @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
         
          @*btn btn-primary: cho nút có phông xanh*@
          @*btn-sm: là 1 class của bootstrap để cỡ chữ nhỏ hơn*@

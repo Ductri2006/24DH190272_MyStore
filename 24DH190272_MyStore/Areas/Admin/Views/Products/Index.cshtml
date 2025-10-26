@@ -1,0 +1,54 @@
+﻿@model IEnumerable<_24DH190272_MyStore.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="bg-success">Danh sách sản phẩm</h2>
+
+<table class="table bg-info container-fluid">
+    <tr>
+        <th class="bg-success col-md-3">
+            Hình ảnh
+        </th>
+        <th  class="bg-success col-md-2">
+            Tên sản phẩm
+        </th>
+        <th  class="bg-success col-md-1">
+            Đơn giá
+        </th>
+        <th class="bg-success col-md-2">
+            Danh mục
+        </th>
+        <th class="bg-success col-md-4"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+       <tr>
+           <td>
+               <img src="@item.ProductImage" alt="@item.ProductName"
+                    style="width:120px; height:160px; object-fit:cover; border-radius:6px;" />
+           </td>
+           <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+           <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+           <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+           <td>
+               @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" }) |
+               @Html.ActionLink("Chi tiết", "Details", new { id = item.ProductID }, new { @class = "btn btn-info btn-sm" }) |
+               @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm" })
+           </td>
+       </tr>
+    }
+
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-8 col-md-4">
+        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+
+        @*btn btn-primary: cho nút có phông xanh*@
+        @*btn-sm: là 1 class của bootstrap để cỡ chữ nhỏ hơn*@
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model _24DH190272_MyStore.Models.Product
+
+
+
+<div class="form-horizontal">
+    <h4 class="bg-success text-center p-2 rounded">Thông tin sản phẩm</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>Tên sản phẩm:</dt>
+        <dd>@Html.DisplayFor(model => model.ProductName)</dd>
+
+        <dt>Mô tả:</dt>
+        <dd>@Html.DisplayFor(model => model.ProductDescription)</dd>
+
+        <dt>Đơn giá:</dt>
+        <dd>@Html.DisplayFor(model => model.ProductPrice)</dd>
+
+        <dt>Danh mục:</dt>
+        <dd>@Html.DisplayFor(model => model.Category.CategoryName)</dd>
+
+        <dt>Hình ảnh:</dt>
+        <dd>
+            <img src="@Model.ProductImage"
+                 alt="@Model.ProductName"
+                 style="width:200px; height:240px; object-fit:cover; border-radius:10px;" />
+        </dd>
+    </dl>
+</div>
+
