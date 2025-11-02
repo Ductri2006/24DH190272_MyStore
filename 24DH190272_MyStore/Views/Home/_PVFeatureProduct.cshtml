@@ -1,0 +1,25 @@
+﻿@model IEnumerable<_24DH190272_MyStore.Models.Product>
+
+@* FILE NÀY CHỈ NÊN CHỨA PHẦN SẢN PHẨM NỔI BẬT *@
+
+<div class="featured-products">
+    <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+    <div class="products-grid">
+
+        @* Vòng lặp @foreach này sẽ duyệt qua TẤT CẢ các sản phẩm trong danh sách FeaturedProducts *@
+        @foreach (var item in Model)
+        {
+            <div class="product-card">
+                <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID })">
+
+                    <img src="@item.ProductImage" alt="@item.ProductName">
+                    <p>@item.ProductName</p>
+                    <p class="price">@string.Format("{0:N0}₫", item.ProductPrice)</p>
+                    <button class="buy-btn">Mua ngay</button>
+
+                </a>
+            </div>
+        }
+    </div>
+</div>
+

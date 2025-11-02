@@ -1,0 +1,63 @@
+﻿@model _24DH190272_MyStore.Models.ProductDetailsVM
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = Model.Product.ProductName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/CustomerDetailProduct.css" rel="stylesheet" />
+
+<div class="product-detail-container">
+
+    <div class="product-image-col">
+        <img src="@Model.Product.ProductImage" alt="@Model.Product.ProductName" />
+    </div>
+
+    <div class="product-info-col">
+        <h2>@Model.Product.ProductName</h2>
+        <p class="price-detail">@string.Format("{0:N0}₫", Model.Product.ProductPrice)</p>
+
+        <hr />
+        <h4>Mô tả sản phẩm</h4>
+        <p class="product-description">
+            @Model.Product.ProductDescription
+        </p>
+    </div>
+
+    <div class="product-order-col">
+
+        <div class="order-box">
+            @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.Product.ProductID)
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Quantity, "Số lượng:")
+                    @Html.TextBoxFor(m => m.Quantity, new { @type = "number", @min = "1", @max = "99", @class = "quantity-input" })
+                    @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="estimated-total">
+                    Tạm tính: <span>@string.Format("{0:N0}₫", (Model.Product.ProductPrice * Model.Quantity))</span>
+                </div>
+
+                <button type="submit" class="btn-add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+            }
+        </div>
+
+        <div class="top-deals-section">
+            <h4>Sản phẩm bán chạy</h4>
+            @Html.Partial("_PVTopProduct", Model.TopProducts)
+            <div class="pagination-container">
+                @Html.PagedListPager(Model.TopProducts, page => Url.Action("ProductDetails", new { id = Model.Product.ProductID, quantity = Model.Quantity, page }))
+            </div>
+        </div>
+    </div>
+
+    <div class="related-products-section">
+        <h3>Sản phẩm tương tự</h3>
+        @Html.Partial("_PVRelatedProduct", Model.RelatedProducts)
+    </div>
+
+</div>

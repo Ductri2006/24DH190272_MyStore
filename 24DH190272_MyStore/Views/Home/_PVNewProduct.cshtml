@@ -1,0 +1,22 @@
+﻿@model PagedList.IPagedList<_24DH190272_MyStore.Models.Product>
+@using PagedList.Mvc;
+
+
+
+<div class="list-product">
+    <h2 class="section-title">Sản Phẩm Mới</h2>
+    <div class="products-grid">
+        @* Dùng vòng lặp để hiển thị sản phẩm *@
+        @foreach (var item in Model)
+        {
+            <div class="product-card">
+            </div>
+        }
+    </div>
+</div>
+
+<div class="pagination-container">
+    @* Gọi helper PagedListPager để tạo các nút phân trang *@
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTerm = ViewBag.SearchTerm }))
+</div>
+

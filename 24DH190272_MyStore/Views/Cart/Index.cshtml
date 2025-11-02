@@ -1,0 +1,66 @@
+﻿@model _24DH190272_MyStore.Models.Cart
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GIỎ HÀNG CỦA BẠN</h2>
+
+@if (Model.Items.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Ảnh</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng cộng</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td><img src="@item.ProductImage" alt="@item.ProductName" style="width: 100px;" /></td>
+                    <td>@string.Format("{0:N0}₫", item.UnitPrice)</td>
+                    <td>
+                        @using (Html.BeginForm("UpdateQuantity", "Cart", new { id = item.ProductID }))
+                        {
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" style="width: 60px;" />
+                            <button type="submit" class="btn-update">Cập nhật</button>
+                        }
+                    </td>
+                    <td>@string.Format("{0:N0}₫", item.TotalPrice)</td>
+                    <td>
+                        @using (Html.BeginForm("RemoveFromCart", "Cart", new { id = item.ProductID }))
+                        {
+                            <button type="submit" class="btn-remove">Xóa</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align:right; font-weight:bold;">TỔNG CỘNG:</td>
+                <td style="font-weight:bold; color:red;">@string.Format("{0:N0}₫", Model.TotalValue())</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    @Html.ActionLink("Xóa sạch giỏ hàng", "ClearCart", "Cart", null, new { @class = "btn-clear-cart" })
+
+                    @Html.ActionLink("Tiến hành Thanh toán", "Checkout", "Order", null, new { @class = "btn-checkout" })
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p class="alert alert-info">Giỏ hàng của bạn đang trống.</p>
+}
+

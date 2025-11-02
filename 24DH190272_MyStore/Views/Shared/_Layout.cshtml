@@ -6,24 +6,42 @@
     <title>@ViewBag.Title - QUẢN TRỊ WEBSITE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/CustomerHome.css" rel="stylesheet" />
+    
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
+    <header class="main-header">
+        <a href="@Url.Action("TrangChu", "Home")" class="logo">
+            <img src="~/Content/Images/logo phonestore.png" alt="PhoneStore Logo"> <span>PhoneStore</span>
+        </a>
+
+        <div class="header-search-bar">
+            @using (Html.BeginForm("TrangChu", "Home", FormMethod.Get))
+            {
+                @Html.TextBox("searchTerm", null, new { @class = "search-input", placeholder = "Tìm kiếm sản phẩm..." })
+                <button type="submit">Tìm kiếm</button>
+            }
         </div>
-    </nav>
+
+        <nav class="header-nav-buttons">
+
+            <a href="@Url.Action("TrangChu", "Home")" class="nav-button">Trang Chủ</a>
+            <a href="@Url.Action("Index", "Cart")" class="nav-button">Giỏ Hàng</a>
+            <a href="#" class="nav-button">Liên hệ</a>
+            @if (Session["Username"] == null)
+            {
+                <a href="@Url.Action("Register", "Account")" class="nav-button">Đăng Ký</a>
+                <a href="@Url.Action("Login", "Account")" class="nav-button">Đăng Nhập</a>
+            }
+            else
+            {
+                <span class="nav-button" style="background-color: transparent; border: none; color: #333;">
+                    Xin chào, @Session["Username"]
+                </span>
+                <a href="@Url.Action("Logout", "Account")" class="nav-button">Đăng Xuất</a>
+            }
+        </nav>
+    </header>
     <div class="container body-content">
         @RenderBody()
         <hr />

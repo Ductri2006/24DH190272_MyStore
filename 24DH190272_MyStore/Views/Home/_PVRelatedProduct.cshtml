@@ -1,0 +1,16 @@
+﻿@model IEnumerable<_24DH190272_MyStore.Models.Product>
+
+<div class="products-grid">
+    @foreach (var item in Model)
+    {
+        <div class="product-card">
+            <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID })">
+                <img src="@item.ProductImage" alt="@item.ProductName">
+                <p>@item.ProductName</p>
+                <p class="price">@string.Format("{0:N0}₫", item.ProductPrice)</p>
+                <button class="buy-btn">Mua ngay</button>
+            </a>
+        </div>
+    }
+</div>
+

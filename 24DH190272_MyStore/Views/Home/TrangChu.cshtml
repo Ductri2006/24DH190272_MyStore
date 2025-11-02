@@ -1,0 +1,23 @@
+﻿@model _24DH190272_MyStore.Models.HomeProductVM
+
+@{
+    ViewBag.Title = "Trang Chủ PhoneStore";
+
+}
+
+
+<div class="main-banner-container">
+    <a href="#">
+        <img src="https://raw.githubusercontent.com/DatPham06/webdata/main/dienthoai/690x300_iPhone_17_Pro_Opensale_v3.png" alt="iPhone 17 PRO Banner">
+    </a>
+</div>
+
+<section id="featureProd">
+
+    @Html.Partial("_PVFeatureProduct", Model.FeaturedProducts)
+</section>
+
+<section id="newProd">
+    <h3>Sản Phẩm mới</h3>
+    @Html.Partial("_PVNewProduct", Model.NewProducts)
+</section>

@@ -1,0 +1,171 @@
+﻿/* --- 1. CSS CHO HEADER (THANH ĐIỀU HƯỚNG MÀU CAM) --- */
+
+/* Áp dụng cho file _Layout.cshtml */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Màu nền xám nhạt */
+}
+
+.main-header {
+    background-color: #f7d4a1; /* Màu cam be */
+    padding: 10px 5%; /* 5% lề hai bên */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #e6c28f;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+    .logo img {
+        height: 40px; /* Đặt chiều cao logo */
+        margin-right: 10px;
+    }
+
+/* Thanh tìm kiếm ở giữa */
+.header-search-bar {
+    display: flex;
+    flex-grow: 1; /* Cho phép co dãn */
+    margin: 0 30px; /* Khoảng cách với logo và nút */
+    max-width: 600px;
+}
+
+    .header-search-bar input[type="text"] {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px; /* Bo góc trái */
+        border-right: none;
+        font-size: 14px;
+    }
+
+    .header-search-bar button {
+        padding: 10px 20px;
+        background-color: #f0ad4e; /* Màu cam nút */
+        border: 1px solid #eea236;
+        color: white;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0; /* Bo góc phải */
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+        .header-search-bar button:hover {
+            background-color: #ec971f;
+        }
+
+/* Các nút điều hướng bên phải */
+.header-nav-buttons {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách icon và chữ */
+    padding: 10px 15px;
+    background-color: #f0ad4e;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #eea236;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+    .nav-button:hover {
+        background-color: #ec971f;
+    }
+
+/* --- 2. CSS CHO CARD SẢN PHẨM (SỬA LỖI XẤU) --- */
+
+/* Áp dụng cho _PVFeatureProduct, _PVNewProduct, v.v. */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Hiển thị lưới tự động */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #333;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+    .product-card:hover {
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .product-card a {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px; /* Đặt chiều cao cố định cho ảnh */
+        object-fit: cover; /* Giữ tỷ lệ ảnh */
+    }
+
+    .product-card p {
+        margin: 10px 15px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .product-card .price {
+        font-size: 18px;
+        font-weight: bold;
+        color: #d00000;
+        margin-top: auto; /* Đẩy giá xuống dưới */
+    }
+
+    .product-card .buy-btn {
+        background-color: #f0ad4e;
+        color: white;
+        border: none;
+        padding: 12px 15px;
+        margin: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+/* --- 3. CSS CHO CÁC TIÊU ĐỀ PHẦN --- */
+/* (Ví dụ: "Sản Phẩm Nổi Bật", "Sản Phẩm Mới") */
+
+#featureProd h3,
+#newProd h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+}

@@ -1,0 +1,60 @@
+﻿/* --- CSS CHO TRANG CHI TIẾT SẢN PHẨM --- */
+
+/* Container chính bao bọc 3 cột */
+.product-detail-container {
+    display: grid; /* SỬ DỤNG GRID */
+    grid-template-columns: 3fr 4fr 3fr; /* Chia 3 cột theo tỷ lệ 30%-40%-30% */
+    gap: 20px; /* Khoảng cách giữa các cột */
+
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Cột 1: Ảnh sản phẩm */
+.product-image-col {
+    /* Không cần set % chiều rộng nữa, grid đã lo */
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+    .product-image-col img {
+        width: 100%;
+        border: 1px solid #eee;
+        border-radius: 5px;
+    }
+
+/* Cột 2: Thông tin sản phẩm (Tên, Giá, Mô tả) */
+.product-info-col {
+    padding: 15px;
+    box-sizing: border-box;
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+}
+
+/* ... (Giữ nguyên CSS cho h2, .price-detail, .product-description) ... */
+
+/* Cột 3: Đặt hàng và Sản phẩm bán chạy */
+.product-order-col {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* ... (Giữ nguyên CSS cho .order-box, .btn-add-to-cart, .top-deals-section) ... */
+
+
+/* Phần "Sản phẩm tương tự" (Nằm bên dưới 3 cột) */
+.related-products-section {
+    /* Ra lệnh cho phần này kéo dài hết 3 cột */
+    grid-column: 1 / -1; /* Bắt đầu từ cột 1 và kết thúc ở cột cuối cùng */
+
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* ... (Giữ nguyên CSS cho h3 của .related-products-section) ... */

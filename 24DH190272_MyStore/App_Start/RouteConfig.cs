@@ -16,7 +16,7 @@ namespace _24DH190272_MyStore
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                defaults: new { controller = "Home", action = "TrangChu", id = UrlParameter.Optional },
                 // THÊM DÒNG QUAN TRỌNG NÀY VÀO
                 namespaces: new[] { "_24DH190272_MyStore.Controllers" }
             );
