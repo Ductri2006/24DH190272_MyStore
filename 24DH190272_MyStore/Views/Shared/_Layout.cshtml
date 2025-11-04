@@ -35,9 +35,9 @@
             }
             else
             {
-                <span class="nav-button" style="background-color: transparent; border: none; color: #333;">
-                    Xin chào, @Session["Username"]
-                </span>
+                 <a href="@Url.Action("ProfileInfo", "Account")" class="nav-button" style="background-color: transparent; border: none; color: #333;">
+                       Xin chào, @Session["Username"]
+                 </a>
                 <a href="@Url.Action("Logout", "Account")" class="nav-button">Đăng Xuất</a>
             }
         </nav>

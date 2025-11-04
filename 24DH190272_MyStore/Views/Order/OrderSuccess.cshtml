@@ -1,0 +1,44 @@
+﻿@model _24DH190272_MyStore.Models.Order
+
+@{
+    ViewBag.Title = "Đặt Hàng Thành Công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cảm ơn bạn! Đơn hàng của bạn đã được ghi nhận.</h2>
+
+<div>
+    <h4>Thông tin đơn hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Mã đơn hàng:</dt>
+        <dd>@Model.OrderID</dd>
+
+        <dt>Ngày đặt hàng:</dt>
+        <dd>@Model.OrderDate</dd>
+
+        <dt>Tổng tiền:</dt>
+        <dd>@string.Format("{0:N0}₫", Model.TotalAmount)</dd>
+
+        <dt>Địa chỉ giao hàng:</dt>
+        <dd>@Model.ShippingAddress</dd>
+
+        <dt>Phương thức thanh toán:</dt>
+        <dd>@Model.PaymentMethod</dd>
+    </dl>
+
+    <h4>Chi tiết sản phẩm</h4>
+    <table class="table">
+        @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>@item.Product.ProductName</td>
+                <td>Số lượng: @item.Quantity</td>
+                <td>@string.Format("{0:N0}₫", item.UnitPrice)</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Quay về Trang chủ", "TrangChu", "Home")
+</p>

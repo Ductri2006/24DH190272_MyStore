@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using _24DH190272_MyStore; // <-- THÊM DÒNG NÀY
 
 
 namespace _24DH190272_MyStore.Controllers
@@ -33,7 +34,7 @@ namespace _24DH190272_MyStore.Controllers
 
             // --- Lấy danh sách sản phẩm nổi bật ---
             model.FeaturedProducts = products
-                .OrderByDescending(p => p.OrderDetails.Count)
+                .OrderByDescending(p => p.OrderDetails.Count())
                 .Take(10)
                 .ToList();
 

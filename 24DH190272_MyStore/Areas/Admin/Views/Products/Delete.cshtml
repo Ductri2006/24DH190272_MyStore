@@ -9,11 +9,19 @@
 
 <h4 class="alert-danger">Bạn thực sự muốn xóa sản phẩm này à ?</h4>
 
-@Html.Partial("PVProductInfo",Model)
+@Html.Partial("PVProductInfo", Model)
 
-<div class="form-group">
-    <div class="col-md-offset-3 col-md-9">
-        @Html.ActionLink("sửa", "Edit", new { id = Model.ProductID }, new { @class = "btn btn-primary btn-sm" }) |
-        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-primary btn-sm" })
+@* Thay thế khối div cũ bằng khối @using Html.BeginForm này *@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @* Đây là nút Xóa (Submit) *@
+        <input type="submit" value="Xóa" class="btn btn-danger" /> |
+
+        @* Đây là nút Quay lại (Link) *@
+        @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
     </div>
-</div>
+}

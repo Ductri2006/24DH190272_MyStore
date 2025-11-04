@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security; // Cần cho FormsAuthentication
+using _24DH190272_MyStore;
 
 namespace _24DH190272_MyStore.Controllers
 {
@@ -153,6 +154,26 @@ namespace _24DH190272_MyStore.Controllers
 
             // 3. CHUYỂN VỀ TRANG CHỦ
             return RedirectToAction("TrangChu", "Home");
+        }
+
+        [Authorize] // bắt buộc người dùng phải có trang này mới mua hàng được
+        public ActionResult ProfileInfo()
+        {
+            // 1. Lấy Username của người dùng đã đăng nhập từ cookie
+            string username = User.Identity.Name;
+
+            // 2. Lấy thông tin Customer từ Database
+            // (Thay "Customers" và "Username" bằng tên cột/bảng của bạn)
+            var customer = db.Customers.FirstOrDefault(c => c.Username == username);
+
+            if (customer == null)
+            {
+                // Nếu có User (đăng nhập) nhưng không có Customer (lỗi dữ liệu)
+                return HttpNotFound("Không tìm thấy thông tin khách hàng.");
+            }
+
+            // 3. Gửi Model "Customer" sang View
+            return View(customer);
         }
 
 

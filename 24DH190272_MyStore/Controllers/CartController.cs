@@ -1,6 +1,7 @@
 ﻿using _24DH190272_MyStore.Models;
 using System.Linq;
 using System.Web.Mvc;
+using _24DH190272_MyStore; // <-- THÊM DÒNG NÀY
 
 namespace TenProjectCuaBan.Controllers
 {
