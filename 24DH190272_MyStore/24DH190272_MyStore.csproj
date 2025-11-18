@@ -208,6 +208,7 @@
       <DependentUpon>MyStoreModel.edmx</DependentUpon>
       <LastGenOutput>MyStoreModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ĐATABAY\MyStore_Script.sql" />
     <EntityDeploy Include="Models\MyStoreModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyStoreModel.Designer.cs</LastGenOutput>
@@ -278,6 +279,7 @@
     <Content Include="Views\Account\ProfileInfo.cshtml" />
     <Content Include="Views\Order\Checkout.cshtml" />
     <Content Include="Views\Order\OrderSuccess.cshtml" />
+    <Content Include="Views\Order\OrderHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

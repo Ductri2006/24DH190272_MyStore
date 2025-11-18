@@ -89,7 +89,7 @@ namespace _24DH190272_MyStore.Controllers
             {
                 CustomerID = model.CustomerID,
                 OrderDate = DateTime.Now,
-                TotalAmount = model.TotalAmount,
+                TotalAmount = cart.TotalValue(), // <-- SỬA LỖI Ở ĐÂY (Lấy từ Session)
                 PaymentStatus = "Pending", // Trạng thái chờ thanh toán 
                 // Lấy các trường mới từ Database (đã cập nhật)
                 ShippingAddress = model.ShippingAddress,
@@ -137,6 +137,32 @@ namespace _24DH190272_MyStore.Controllers
             }
 
             return View(order);
+        }
+
+        // GET: Order/OrderHistory
+        // Hiển thị danh sách các đơn hàng của người dùng đang đăng nhập
+        public ActionResult OrderHistory()
+        {
+            // 1. Lấy User đang đăng nhập
+            var username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // 2. Tìm Customer tương ứng
+            var customer = db.Customers.FirstOrDefault(c => c.Username == username);
+            if (customer == null)
+            {
+                return RedirectToAction("TrangChu", "Home");
+            }
+
+            // 3. Lấy danh sách đơn hàng của Customer này, sắp xếp mới nhất lên đầu
+            var orders = db.Orders.Where(o => o.CustomerID == customer.CustomerID)
+                                  .OrderByDescending(o => o.OrderDate)
+                                  .ToList();
+
+            return View(orders);
         }
     }
 }

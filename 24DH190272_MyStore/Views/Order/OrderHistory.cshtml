@@ -1,0 +1,57 @@
+﻿@model IEnumerable<_24DH190272_MyStore.Models.Order>
+
+@{
+    ViewBag.Title = "Lịch sử mua hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 30px;">
+    <h2 class="text-center">Lịch sử mua hàng của bạn</h2>
+    <hr />
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            Bạn chưa có đơn hàng nào. @Html.ActionLink("Mua sắm ngay", "TrangChu", "Home")
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Phương thức TT</th>
+                    <th>Trạng thái</th>
+                    <th>Địa chỉ giao</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>#@item.OrderID</td>
+                        <td>@String.Format("{0:dd/MM/yyyy HH:mm}", item.OrderDate)</td>
+                        <td style="color: #d00000; font-weight: bold;">
+                            @String.Format("{0:N0}₫", item.TotalAmount)
+                        </td>
+                        <td>@item.PaymentMethod</td>
+                        <td>
+                            @if (item.PaymentStatus == "Pending")
+                            {
+                                <span class="badge badge-warning" style="color:orange">Chờ xử lý</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-success">Đã thanh toán</span>
+                            }
+                        </td>
+                        <td>@item.ShippingAddress</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

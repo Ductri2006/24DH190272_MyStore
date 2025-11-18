@@ -12,6 +12,9 @@
         @using (Html.BeginForm("Checkout", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(m => m.CustomerID)
+
             <h4>Thông tin giao hàng và thanh toán</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })

@@ -27,7 +27,7 @@
 
             <a href="@Url.Action("TrangChu", "Home")" class="nav-button">Trang Chủ</a>
             <a href="@Url.Action("Index", "Cart")" class="nav-button">Giỏ Hàng</a>
-            <a href="#" class="nav-button">Liên hệ</a>
+            <a href="@Url.Action("Contact", "Home")" class="nav-button">Liên hệ</a>
             @if (Session["Username"] == null)
             {
                 <a href="@Url.Action("Register", "Account")" class="nav-button">Đăng Ký</a>
@@ -35,10 +35,11 @@
             }
             else
             {
-                 <a href="@Url.Action("ProfileInfo", "Account")" class="nav-button" style="background-color: transparent; border: none; color: #333;">
-                       Xin chào, @Session["Username"]
-                 </a>
-                <a href="@Url.Action("Logout", "Account")" class="nav-button">Đăng Xuất</a>
+            <span class="nav-button" style="background-color: transparent; border: none; color: #333;">
+                Xin chào, @Session["Username"]
+            </span>
+            <a href="@Url.Action("OrderHistory", "Order")" class="nav-button">Đơn hàng</a>
+            <a href="@Url.Action("Logout", "Account")" class="nav-button">Đăng Xuất</a>
             }
         </nav>
     </header>
