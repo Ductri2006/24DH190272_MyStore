@@ -1,0 +1,153 @@
+﻿/* ====================================================== */
+/* GIAO DIỆN ĐĂNG NHẬP - ĐĂNG KÝ - PROFILE (STYLE THẺ BÀI) */
+/* ====================================================== */
+
+/* 1. KHUNG CHỨA CHÍNH (Màu kem cam) */
+.authen-container {
+    background-color: #ffeecf; /* Màu nền chính */
+    max-width: 550px; /* Chiều rộng khung */
+    margin: 50px auto; /* Canh giữa màn hình */
+    padding: 40px;
+    border-radius: 20px; /* Bo tròn góc */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Đổ bóng */
+    color: #5d4037; /* Màu chữ nâu đậm */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    /* Tiêu đề H2 */
+    .authen-container h2 {
+        text-align: center;
+        color: #e65100; /* Cam đậm */
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Dòng mô tả H4 */
+    .authen-container h4 {
+        text-align: center;
+        font-size: 14px;
+        color: #795548;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ffcc80; /* Đường kẻ ngang mờ */
+        padding-bottom: 15px;
+    }
+
+    /* 2. FORM LOGIN & REGISTER (Ô NHẬP LIỆU) */
+    .authen-container .control-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        text-align: left;
+        color: #5d4037;
+    }
+
+    /* Ô nhập liệu (Màu trắng, bo tròn) */
+    .authen-container .form-control {
+        border-radius: 50px;
+        border: 1px solid #fff;
+        padding: 12px 20px;
+        background-color: #fff;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 15px; /* Khoảng cách giữa các ô */
+    }
+
+        .authen-container .form-control:focus {
+            border-color: #ff9800;
+            box-shadow: 0 0 8px rgba(255, 152, 0, 0.3);
+            outline: none;
+        }
+
+/* 3. BẢNG THÔNG TIN PROFILE (Dùng TABLE TH-TD) */
+.profile-table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse; /* Gộp đường viền */
+}
+
+    .profile-table th, .profile-table td {
+        padding: 12px 10px;
+        vertical-align: middle;
+        border-bottom: 1px dashed #dcb888; /* Gạch chân đứt đoạn */
+    }
+
+    /* Cột tiêu đề (Bên trái) */
+    .profile-table th {
+        width: 35%;
+        text-align: right;
+        color: #e65100;
+        font-weight: bold;
+        padding-right: 20px;
+    }
+
+    /* Cột nội dung (Bên phải - KHÔNG CÓ NỀN TRẮNG) */
+    .profile-table td {
+        text-align: left;
+        color: #3e2723;
+        font-weight: 600;
+        background-color: transparent; /* Trong suốt */
+    }
+
+    /* Xóa gạch chân ở dòng cuối cùng cho đẹp */
+    .profile-table tr:last-child th,
+    .profile-table tr:last-child td {
+        border-bottom: none;
+    }
+
+/* 4. NÚT BẤM (FULL WIDTH - CHỮ TRẮNG) */
+.authen-container .btn {
+    width: 100%; /* Full chiều rộng */
+    border-radius: 50px; /* Bo tròn */
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    color: #ffffff !important; /* Bắt buộc chữ trắng */
+    text-transform: uppercase;
+    transition: 0.3s;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Nút Cam (Primary) */
+.authen-container .btn-primary {
+    background-color: #ff9800;
+    box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+}
+
+    .authen-container .btn-primary:hover {
+        background-color: #ef6c00;
+        transform: translateY(-2px);
+    }
+
+/* Nút Nâu (Back) */
+.authen-container .btn-back {
+    background-color: #8d6e63;
+    box-shadow: 0 4px 10px rgba(141, 110, 99, 0.4);
+}
+
+    .authen-container .btn-back:hover {
+        background-color: #6d4c41;
+        transform: translateY(-2px);
+    }
+
+/* Link text (Đăng ký ngay...) */
+.authen-link {
+    text-align: center;
+    margin-top: 20px;
+    display: block;
+}
+
+    .authen-link a {
+        color: #e65100;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        .authen-link a:hover {
+            text-decoration: underline;
+        }

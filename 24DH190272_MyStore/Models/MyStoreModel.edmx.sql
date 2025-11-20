@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/18/2025 21:17:27
--- Generated from EDMX file: C:\Users\thanh\OneDrive\Documents\WebProject1\MyStore\24DH190272_MyStore\Models\MyStoreModel.edmx
+-- Date Created: 11/20/2025 21:42:35
+-- Generated from EDMX file: D:\SQL_NĂM2\24DH190272_MyStore\24DH190272_MyStore\Models\MyStoreModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,46 +17,46 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK__Order__CustomerI__412EB0B6]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Order] DROP CONSTRAINT [FK__Order__CustomerI__412EB0B6];
-GO
-IF OBJECT_ID(N'[dbo].[FK__OrderDeta__Order__44FF419A]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderDetail] DROP CONSTRAINT [FK__OrderDeta__Order__44FF419A];
-GO
-IF OBJECT_ID(N'[dbo].[FK__OrderDeta__Produ__440B1D61]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OrderDetail] DROP CONSTRAINT [FK__OrderDeta__Produ__440B1D61];
-GO
 IF OBJECT_ID(N'[dbo].[FK_Pro_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Product] DROP CONSTRAINT [FK_Pro_Category];
+    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_Pro_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Order__CustomerI__412EB0B6]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK__Order__CustomerI__412EB0B6];
 GO
 IF OBJECT_ID(N'[dbo].[FK_User_Customer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Customer] DROP CONSTRAINT [FK_User_Customer];
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_User_Customer];
+GO
+IF OBJECT_ID(N'[dbo].[FK__OrderDeta__Order__44FF419A]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK__OrderDeta__Order__44FF419A];
+GO
+IF OBJECT_ID(N'[dbo].[FK__OrderDeta__Produ__440B1D61]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK__OrderDeta__Produ__440B1D61];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Category]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Category];
+IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categories];
 GO
-IF OBJECT_ID(N'[dbo].[Customer]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Customer];
+IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customers];
 GO
-IF OBJECT_ID(N'[dbo].[Order]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Order];
+IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Orders];
 GO
-IF OBJECT_ID(N'[dbo].[OrderDetail]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OrderDetail];
+IF OBJECT_ID(N'[dbo].[OrderDetails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderDetails];
 GO
-IF OBJECT_ID(N'[dbo].[Product]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Product];
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
 GO
 IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[sysdiagrams];
 GO
-IF OBJECT_ID(N'[dbo].[User]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[User];
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
 GO
 
 -- --------------------------------------------------

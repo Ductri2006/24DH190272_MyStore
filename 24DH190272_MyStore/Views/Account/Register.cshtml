@@ -1,62 +1,67 @@
 ﻿@model _24DH190272_MyStore.Models.RegisterVM
 
 @{
-    ViewBag.Title = "Đăng Ký Tài Khoản";
+    ViewBag.Title = "ĐĂNG KÝ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="authen-container">
+    <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Tạo tài khoản mới.</h4>
-    <hr />
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Tạo tài khoản thành viên mới</h4>
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "text-align:center; display:block;" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Username, new { @class = "control-label" })
-        @Html.EditorFor(m => m.Username, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <label class="control-label">Tên đăng nhập</label>
+            @Html.EditorFor(m => m.Username, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <label class="control-label">Mật khẩu</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <label class="control-label">Xác nhận mật khẩu</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
-        @Html.EditorFor(m => m.FullName, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <label class="control-label">Họ và tên</label>
+            @Html.EditorFor(m => m.FullName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <label class="control-label">Email</label>
+            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.CustomerPhone, new { @class = "control-label" })
-        @Html.EditorFor(m => m.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            <label class="control-label">Số điện thoại</label>
+            @Html.EditorFor(m => m.CustomerPhone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        <input type="submit" value="Đăng ký" class="btn btn-primary" />
-    </div>
-}
+        <div class="form-group" style="margin-top: 20px; width: 100%; text-align: center; padding: 0;">
+            <input type="submit" value="Đăng Ký Tài Khoản" class="btn btn-primary" style="width: 100% !important; display: block !important; margin-left: auto !important; margin-right: auto !important;" />
+        </div>
+
+        <div class="authen-link">
+            <span>Đã có tài khoản?</span>
+            @Html.ActionLink("Đăng nhập", "Login")
+        </div>
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

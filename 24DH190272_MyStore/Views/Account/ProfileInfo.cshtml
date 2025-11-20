@@ -1,43 +1,47 @@
 ﻿@model _24DH190272_MyStore.Models.Customer
 
 @{
-    ViewBag.Title = "Thông Tin Tài Khoản";
+    ViewBag.Title = "HỒ SƠ CÁ NHÂN";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="margin-top: 30px;">
-    <h2>Thông tin tài khoản của bạn</h2>
-    <hr />
+<div class="authen-container" style="max-width: 600px;">
+    <h2>THÔNG TIN TÀI KHOẢN</h2>
+    <h4>Quản lý hồ sơ cá nhân của bạn</h4>
+
+    <table class="profile-table">
+        <tr>
+            <th>Họ và tên:</th>
+            <td>@Html.DisplayFor(model => model.CustomerName)</td>
+        </tr>
+        <tr>
+            <th>Tên đăng nhập:</th>
+            <td>@Html.DisplayFor(model => model.Username)</td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>@Html.DisplayFor(model => model.CustomerEmail)</td>
+        </tr>
+        <tr>
+            <th>Số điện thoại:</th>
+            <td>@Html.DisplayFor(model => model.CustomerPhone)</td>
+        </tr>
+        <tr>
+            <th>Địa chỉ:</th>
+            <td>
+                @(string.IsNullOrEmpty(Model.CustomerAddress) ? "Chưa cập nhật" : Model.CustomerAddress)
+            </td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 30px;"></div>
 
     <div class="row">
-        <div class="col-md-8">
-            <dl class="dl-horizontal">
-                <dt>Họ và tên:</dt>
-                <dd>@Html.DisplayFor(model => model.CustomerName)</dd>
-                <br />
-
-                <dt>Tên đăng nhập:</dt>
-                <dd>@Html.DisplayFor(model => model.Username)</dd>
-                <br />
-
-                <dt>Email:</dt>
-                <dd>@Html.DisplayFor(model => model.CustomerEmail)</dd>
-                <br />
-
-                <dt>Số điện thoại:</dt>
-                <dd>@Html.DisplayFor(model => model.CustomerPhone)</dd>
-                <br />
-
-                <dt>Địa chỉ:</dt>
-                <dd>@Html.DisplayFor(model => model.CustomerAddress)</dd>
-            </dl>
+        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+            @Html.ActionLink("Về Trang chủ", "TrangChu", "Home", null, new { @class = "btn btn-back" })
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            @Html.ActionLink("Lịch sử đơn hàng", "OrderHistory", "Order", null, new { @class = "btn btn-primary" })
         </div>
     </div>
-
-    <hr />
-    <p>
-        @Html.ActionLink("Quay về Trang chủ", "TrangChu", "Home", null, new { @class = "btn btn-default" })
-
-        @Html.ActionLink("Lịch sử mua hàng", "OrderHistory", "Order", null, new { @class = "btn btn-info" })
-    </p>
 </div>
