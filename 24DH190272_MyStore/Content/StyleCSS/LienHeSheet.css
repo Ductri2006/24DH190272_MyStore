@@ -1,0 +1,72 @@
+﻿
+body {
+    margin: 0;
+    font-family: 'Times New Roman';
+}
+
+.contact {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    position: relative;
+    /*đặt cơ sở tham chiếu cho các phần con dùng position: absolute (ví dụ .contact-icon). Nếu bỏ relative, icon absolute sẽ lấy body làm tham chiếu.*/
+}
+
+    .contact h1 {
+        font-size: 30px;
+        margin-bottom: 5px; /*khoảng cách giữa tiêu đề và dòng phụ bên dưới*/
+    }
+
+/*tạo khoảng cách giữa dòng phụ và members*/
+.sub-title {
+    font-size: 20px;
+    margin-bottom: 33px;
+    font-style: italic;
+}
+
+.members {
+    display: flex; /*bật chế độ flexbox cho các phần tử con*/
+    justify-content: center; /*căn giữa cả dãy members*/
+    gap: 60px;
+}
+
+.member {
+    text-align: center;
+}
+
+.avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%; /*bo tròn các góc*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 45px; /*khoảng cách giữa avatar và tên*/
+}
+
+.contact-icon {
+    position: absolute; /*đặt cố định icon*/
+    bottom: 20px; /*icon cách đáy 20px*/
+    right: 35px; /*icon cách lề phải 35px*/
+    background-color: #597bff;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /*bo tròn cho icon*/
+
+    display: flex;
+    justify-content: center; /*các phần căn icon ở giữa*/
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    /*con trỏ chuột đổi khi hover, báo hiệu clickable.*/
+}
+
+.contact-img {
+    width: 100%;
+    max-width: 600px; /* Giới hạn chiều rộng tối đa */
+    height: auto; /* Giữ tỉ lệ gốc */
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto; /* Căn giữa ảnh */
+}

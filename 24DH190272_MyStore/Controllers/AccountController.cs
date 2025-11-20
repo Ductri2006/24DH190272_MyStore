@@ -100,46 +100,106 @@ namespace _24DH190272_MyStore.Controllers
         // Xử lý khi người dùng nhấn nút Đăng nhập
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginVM model, string returnUrl) // LoginVM là model bạn đã tạo
+        //public ActionResult Login(LoginVM model, string returnUrl) // LoginVM là model bạn đã tạo
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // 1. KIỂM TRA TÀI KHOẢN TRONG DATABASE
+        //        // (Nhớ mã hóa mật khẩu khi kiểm tra ở dự án thật)
+        //        var user = db.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password && u.UserRole == "C");
+
+        //        if (user != null) // Nếu tìm thấy user
+        //        {
+        //            // 2. LƯU COOKIE XÁC THỰC (Ghi nhớ đăng nhập)
+        //            // Đây là yêu cầu của cô bạn 
+        //            FormsAuthentication.SetAuthCookie(user.Username, model.RememberMe); // RememberMe là checkbox "Ghi nhớ"
+
+        //            // 3. LƯU TRẠNG THÁI VÀO SESSION (Cho _Layout)
+        //            // Yêu cầu của cô bạn 
+        //            Session["Username"] = user.Username;
+        //            Session["UserRole"] = user.UserRole;
+
+        //            // 4. CHUYỂN HƯỚNG
+        //            // (Chuyển về trang họ đang cố truy cập, hoặc về Trang chủ)
+        //            if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+        //                && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+        //            {
+        //                return Redirect(returnUrl);
+        //            }
+        //            else
+        //            {
+        //                return RedirectToAction("TrangChu", "Home");
+        //            }
+        //        }
+        //        else // Nếu tài khoản sai
+        //        {
+        //            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
+        //        }
+        //    }
+
+        //    // Nếu Model không hợp lệ, hiển thị lại form
+        //    return View(model);
+        //}
+
+        public ActionResult Login(LoginVM model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                // 1. KIỂM TRA TÀI KHOẢN TRONG DATABASE
-                // (Nhớ mã hóa mật khẩu khi kiểm tra ở dự án thật)
-                var user = db.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password && u.UserRole == "C");
+                // 1. KIỂM TRA TÀI KHOẢN (Đã sửa: Bỏ điều kiện UserRole == "C" để tìm cả Admin)
+                // Lưu ý: Ở dự án thật nên mã hóa mật khẩu (MD5/BCrypt) trước khi so sánh
+                //var user = db.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+                var user = db.Users.FirstOrDefault(u => u.Username == model.Username
+                                      && u.Password == model.Password
+                                      && (u.UserRole == "C" || u.UserRole == "A"));
 
-                if (user != null) // Nếu tìm thấy user
+                if (user != null) // Đăng nhập thành công
                 {
-                    // 2. LƯU COOKIE XÁC THỰC (Ghi nhớ đăng nhập)
-                    // Đây là yêu cầu của cô bạn 
-                    FormsAuthentication.SetAuthCookie(user.Username, model.RememberMe); // RememberMe là checkbox "Ghi nhớ"
+                    // 2. LƯU COOKIE XÁC THỰC
+                    FormsAuthentication.SetAuthCookie(user.Username, model.RememberMe);
 
-                    // 3. LƯU TRẠNG THÁI VÀO SESSION (Cho _Layout)
-                    // Yêu cầu của cô bạn 
+                    // 3. LƯU SESSION
                     Session["Username"] = user.Username;
-                    Session["UserRole"] = user.UserRole;
+                    Session["UserRole"] = user.UserRole; // Lưu quyền vào Session để check
 
-                    // 4. CHUYỂN HƯỚNG
-                    // (Chuyển về trang họ đang cố truy cập, hoặc về Trang chủ)
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    // 4. PHÂN QUYỀN CHUYỂN HƯỚNG (LOGIC MỚI)
+
+                    // TRƯỜNG HỢP 1: Nếu là Admin (Role A) -> Chuyển sang khu vực Admin (Areas)
+                    if (user.UserRole == "A")
                     {
-                        return Redirect(returnUrl);
+                        // Dựa vào ảnh: Areas -> Admin -> Views -> Home -> Index.cshtml
+                        // Cú pháp: RedirectToAction("Action", "Controller", new { area = "TênArea" })
+                        return RedirectToAction("Index", "Products", new { area = "Admin" });
                     }
-                    else
+
+                    // TRƯỜNG HỢP 2: Nếu là Khách (Role C) -> Về trang chủ
+                    if (user.UserRole == "C")
                     {
-                        return RedirectToAction("TrangChu", "Home");
+                        // Có thể kiểm tra returnUrl nếu muốn người dùng quay lại trang họ đang xem dở
+                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                            && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            // Về trang chủ Client
+                            return RedirectToAction("TrangChu", "Home");
+                        }
                     }
+
+                    // TRƯỜNG HỢP KHÁC (Nếu có role khác thì mặc định về trang chủ)
+                    return RedirectToAction("TrangChu", "Home");
                 }
-                else // Nếu tài khoản sai
+                else // Sai tài khoản hoặc mật khẩu
                 {
                     ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
                 }
             }
 
-            // Nếu Model không hợp lệ, hiển thị lại form
+            // Nếu Model không hợp lệ hoặc đăng nhập sai, hiển thị lại form
             return View(model);
         }
+
 
         // GET: Account/Logout
         // Xử lý khi người dùng nhấn nút Đăng xuất

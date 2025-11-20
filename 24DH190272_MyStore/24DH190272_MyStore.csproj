@@ -192,8 +192,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CustomerDetailProduct.css" />
     <Content Include="Content\CustomerHome.css" />
+    <Content Include="Content\Images\damm.png" />
+    <Content Include="Content\Images\Hình của trực.jpg" />
     <Content Include="Content\Images\logo phonestore.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\StyleCSS\LienHeSheet.css" />
+    <Content Include="Content\StyleCSS\LoginRegisterSheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -203,6 +207,7 @@
       <DependentUpon>MyStoreModel.edmx</DependentUpon>
       <LastGenOutput>MyStoreModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\MyStoreModel.edmx.sql" />
     <Content Include="Models\MyStoreModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyStoreModel.edmx</DependentUpon>
