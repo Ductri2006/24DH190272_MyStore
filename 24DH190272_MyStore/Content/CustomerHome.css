@@ -39,6 +39,7 @@ body {
     flex-grow: 1; /* Cho phép co dãn */
     margin: 0 30px; /* Khoảng cách với logo và nút */
     max-width: 600px;
+    text-wrap:nowrap;/*Chỉnh cho nút tìm kiếm không bị rớt*/
 }
 
     .header-search-bar input[type="text"] {
@@ -169,4 +170,122 @@ body {
     margin-bottom: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-transform: uppercase;
+}
+
+@media (max-width: 992px) {
+    /* 1. Chuyển thanh Header thành cột dọc */
+    .main-header {
+        flex-direction: column; /* Xếp dọc */
+        padding: 15px;
+        height: auto; /* Cho chiều cao tự do */
+    }
+
+    /* 2. Canh giữa Logo */
+    .logo {
+        margin-bottom: 15px;
+    }
+
+    /* 3. Thanh tìm kiếm full màn hình */
+    .header-search-bar {
+        width: 100%;
+        margin: 0 0 15px 0 !important; /* Reset margin */
+        max-width: none;
+    }
+
+        .header-search-bar input[type="text"] {
+            width: 100%; /* Input dài ra hết cỡ */
+        }
+
+    /* 4. Các nút Menu (Trang chủ, Giỏ hàng...) */
+    .header-nav-buttons {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap; /* Nếu nhiều nút quá thì tự xuống dòng */
+        justify-content: center; /* Canh giữa */
+        gap: 10px;
+    }
+
+    .nav-button {
+        flex-grow: 1; /* Các nút tự co giãn cho đều nhau */
+        justify-content: center;
+        font-size: 13px; /* Chữ nhỏ lại xíu cho đỡ chật */
+        padding: 8px 5px;
+    }
+    /* --- CSS CHO BANNER CHÍNH (Thêm vào CustomerHome.css) --- */
+
+    .main-banner-container {
+        width: 100%; /* Đảm bảo khung bao quanh full chiều rộng */
+        overflow: hidden; /* Ẩn đi phần thừa nếu ảnh có lỡ tràn ra */
+        margin-bottom: 20px; /* Cách phần dưới xíu */
+    }
+
+        .main-banner-container img {
+            width: 100%; /* Ép ảnh co giãn theo chiều rộng của khung chứa nó */
+            height: auto; /* Tự động điều chỉnh chiều cao để giữ tỷ lệ ảnh, không bị méo */
+            display: block; /* Quan trọng: Loại bỏ khoảng trắng thừa bên dưới ảnh */
+        }
+    .main-banner-container {
+        margin-top: 20px; /* Thêm tí khoảng cách trên di động */
+    }
+}
+/* --- 1. MÀN HÌNH MÁY TÍNH BẢNG (Tablet: 768px - 1024px) --- */
+@media (max-width: 1024px) {
+    /* Header: Thu nhỏ padding và font chữ xíu cho gọn */
+    .main-header {
+        padding: 10px 2%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-button {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    /* Grid sản phẩm: Giảm khoảng cách giữa các ô */
+    .products-grid {
+        gap: 15px;
+        padding: 0 10px;
+    }
+}
+@media (max-width: 480px) {
+
+    /* Grid sản phẩm: Ép hiển thị 2 cột (thay vì 1 cột to) */
+    .products-grid {
+        /* minmax(150px...) nghĩa là cho phép ô nhỏ xuống 150px để vừa 2 cột */
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px; /* Khoảng cách nhỏ lại */
+    }
+
+    /* Card sản phẩm: Tối ưu cho màn hình bé */
+    .product-card img {
+        height: 150px; /* Ảnh nhỏ lại xíu */
+    }
+
+    .product-card p {
+        font-size: 14px; /* Tên sản phẩm nhỏ lại */
+        margin: 5px 10px;
+        height: 40px; /* Giới hạn chiều cao tên (khoảng 2 dòng) */
+        overflow: hidden; /* Tên dài quá thì cắt bớt */
+    }
+
+    .product-card .price {
+        font-size: 16px;
+        margin: 5px 10px;
+    }
+
+    .product-card .buy-btn {
+        padding: 8px; /* Nút bấm nhỏ lại */
+        margin: 10px;
+        font-size: 12px;
+    }
+
+    /* Ẩn chữ "Giỏ hàng", "Trang chủ" trên menu, chỉ hiện icon (nếu có) hoặc viết tắt */
+    /* Ở đây chỉnh font siêu nhỏ để nó không bị rớt dòng */
+    .nav-button {
+        font-size: 11px;
+        padding: 8px 5px;
+    }
 }
