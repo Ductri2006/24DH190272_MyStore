@@ -1,23 +1,78 @@
-﻿ @model _24DH190272_MyStore.Models.HomeProductVM
+﻿@model _24DH190272_MyStore.Models.HomeProductVM
 
 @{
     ViewBag.Title = "Trang Chủ PhoneStore";
+}
+<style>
+    /* --- CSS CHO SLIDER (BANNER) --- */
 
+/* 1. Cố định khung Slider */
+#mainCarousel {
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden; /* Bo góc và cắt phần thừa */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #f0f0f0; /* Màu nền dự phòng khi ảnh chưa load */
 }
 
+/* 2. Xử lý ảnh bên trong */
+#mainCarousel .item img {
+    width: 100%;        /* Chiều rộng luôn full */
+    height: 450px;      /* ĐẶT CHIỀU CAO CỐ ĐỊNH (Bạn có thể chỉnh số này) */
 
-<div class="main-banner-container">
-    <a href="#">
-        <img src="https://raw.githubusercontent.com/DatPham06/webdata/main/dienthoai/690x300_iPhone_17_Pro_Opensale_v3.png" alt="iPhone 17 PRO Banner">
+    /* QUAN TRỌNG NHẤT: Giúp ảnh không bị méo */
+    object-fit: cover;
+
+    /* Căn giữa ảnh để không bị mất phần trung tâm */
+    object-position: center;
+}
+</style>
+<div id="mainCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <ol class="carousel-indicators">
+        <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mainCarousel" data-slide-to="1"></li>
+        <li data-target="#mainCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+
+        <div class="item active">
+            <a href="#">
+                <img src="https://raw.githubusercontent.com/DatPham06/webdata/main/dienthoai/690x300_iPhone_17_Pro_Opensale_v3.png" alt="iPhone 17 Pro" style="width:100%;">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="https://onewaymobile.vn/upload/1Banner/MACPRO14.webp" alt="Macbook Pro" style="width:100%;">
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="https://tam300.com/wp-content/uploads/2024/09/9468043d7e48d07013ea9f02363257a8-2048x569.png" alt="Banner Quảng Cáo" style="width:100%;">
+            </a>
+        </div>
+
+    </div>
+
+    <a class="left carousel-control" href="#mainCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#mainCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
     </a>
 </div>
-
+<br />
 <section id="featureProd">
-
     @Html.Partial("_PVFeatureProduct", Model.FeaturedProducts)
 </section>
 
+<br />
+
 <section id="newProd">
-    <h3>Sản Phẩm mới</h3>
     @Html.Partial("_PVNewProduct", Model.NewProducts)
 </section>
