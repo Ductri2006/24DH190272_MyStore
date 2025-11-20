@@ -86,7 +86,8 @@ body {
 }
 
     .nav-button:hover {
-        background-color: #ec971f;
+        text-decoration: underline;
+        background-color: #f0f0f0;
     }
 
 /* --- 2. CSS CHO CARD SẢN PHẨM (SỬA LỖI XẤU) --- */

@@ -1,59 +1,43 @@
 ﻿@model _24DH190272_MyStore.Models.Customer
 
 @{
-    ViewBag.Title = "ProfileInfo";
+    ViewBag.Title = "Thông Tin Tài Khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ProfileInfo</h2>
-
-<div>
-    <h4>Customer</h4>
+<div class="container" style="margin-top: 30px;">
+    <h2>Thông tin tài khoản của bạn</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerName)
-        </dd>
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
+                <dt>Họ và tên:</dt>
+                <dd>@Html.DisplayFor(model => model.CustomerName)</dd>
+                <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerPhone)
-        </dt>
+                <dt>Tên đăng nhập:</dt>
+                <dd>@Html.DisplayFor(model => model.Username)</dd>
+                <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerPhone)
-        </dd>
+                <dt>Email:</dt>
+                <dd>@Html.DisplayFor(model => model.CustomerEmail)</dd>
+                <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerEmail)
-        </dt>
+                <dt>Số điện thoại:</dt>
+                <dd>@Html.DisplayFor(model => model.CustomerPhone)</dd>
+                <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerEmail)
-        </dd>
+                <dt>Địa chỉ:</dt>
+                <dd>@Html.DisplayFor(model => model.CustomerAddress)</dd>
+            </dl>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerAddress)
-        </dt>
+    <hr />
+    <p>
+        @Html.ActionLink("Quay về Trang chủ", "TrangChu", "Home", null, new { @class = "btn btn-default" })
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Password)
-        </dd>
-
-    </dl>
+        @Html.ActionLink("Lịch sử mua hàng", "OrderHistory", "Order", null, new { @class = "btn btn-info" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
