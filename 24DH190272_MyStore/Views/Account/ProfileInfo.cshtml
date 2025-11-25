@@ -5,8 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="authen-container" style="max-width: 600px;">
-    <h2>THÔNG TIN TÀI KHOẢN</h2>
+<!-- Áp dụng class profile-container -->
+<div class="authen-container profile-container">
+    <h2>THÔNG TIN TÀI KHOẢN </h2>
     <h4>Quản lý hồ sơ cá nhân của bạn</h4>
 
     <table class="profile-table">
@@ -34,14 +35,28 @@
         </tr>
     </table>
 
+    <!-- HIỂN THỊ THÔNG BÁO THÀNH CÔNG -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <!-- SỬ DỤNG INLINE STYLE ĐỂ ĐẢM BẢO MÀU XANH HIỂN THỊ -->
+        <div style="margin-top: 20px; text-align: center; color: #155724; background-color: #d4edda; border-color: #c3e6cb; padding: 10px; border-radius: 5px;">
+            <strong>Thành công!</strong> @TempData["SuccessMessage"]
+        </div>
+    }
+
     <div style="margin-top: 30px;"></div>
 
-    <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-            @Html.ActionLink("Về Trang chủ", "TrangChu", "Home", null, new { @class = "btn btn-back" })
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-12">
+    <!-- Bố cục 2 cột (col-md-6) -->
+    <div class="row authen-row">
+
+        <!-- NÚT 1: Lịch sử đơn hàng (50% chiều rộng) -->
+        <div class="col-md-6 col-sm-12 col-xs-12 text-center" style="margin-bottom: 10px;">
             @Html.ActionLink("Lịch sử đơn hàng", "OrderHistory", "Order", null, new { @class = "btn btn-primary" })
+        </div>
+
+        <!-- NÚT 2: Chỉnh sửa Hồ sơ (50% chiều rộng) -->
+        <div class="col-md-6 col-sm-12 col-xs-12 text-center">
+            @Html.ActionLink("Chỉnh sửa Hồ sơ", "EditProfile", "Account", null, new { @class = "btn btn-primary btn-profile-edit" })
         </div>
     </div>
 </div>

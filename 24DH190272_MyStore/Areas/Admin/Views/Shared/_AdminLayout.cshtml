@@ -9,29 +9,42 @@
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
-
+    <link href="~/Content/StyleCSS/AdminLayoutSheet.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    @* Áp dụng class Cam Nhạt *@
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom-light-orange">
         <div class="container">
-            @* Link Logo: Trỏ về trang chủ Admin *@
-            @Html.ActionLink("My Store Admin", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
+            @* Logo *@
+            @Html.ActionLink("MY STORE ADMIN", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
 
+            @* QUAN TRỌNG: Thêm nút Toggler lại (dù bạn không dùng mobile) để giữ cấu trúc Bootstrap *@
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            @* SỬA LỖI: Thêm justify-content-between để đẩy Đăng xuất sang phải *@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    @* Link Danh mục - Thêm style margin-right để đẩy chữ bên phải ra *@
-                    <li class="nav-item" style="margin-right: 20px;">
+
+                @* BÊN TRÁI: Các mục điều hướng chính *@
+                @* Dùng mr-auto để đẩy các mục còn lại sang phải *@@* ms-3 để cách logo *@
+                <ul class="navbar-nav mr-auto ms-3">
+                    <li class="nav-item">
                         @Html.ActionLink("Danh Mục", "Index", "Categories", new { area = "Admin" }, new { @class = "nav-link" })
                     </li>
 
-                    @* Link Sản phẩm - Thêm style margin-right *@
-                    <li class="nav-item" style="margin-right: 20px;">
+                    <li class="nav-item">
                         @Html.ActionLink("Sản phẩm", "Index", "Products", new { area = "Admin" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+
+                @* BÊN PHẢI: Mục Đăng xuất *@
+                @* KHÔNG CẦN ms-auto ở đây vì justify-content-between đã làm nhiệm vụ này *@
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        @Html.ActionLink("Đăng xuất", "Logout", "Account", new { area = "" }, new { @class = "nav-link nav-logout" })
                     </li>
                 </ul>
             </div>
@@ -42,8 +55,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Trang Quản Trị</p>
-            <h4>Contact</h4>
-            <p>Nhóm phát triển</p>
+            <p>Nhóm phát triển W06-15</p>
         </footer>
     </div>
 

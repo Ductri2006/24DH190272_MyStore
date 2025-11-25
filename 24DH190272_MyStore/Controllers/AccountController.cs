@@ -1,11 +1,13 @@
-﻿using _24DH190272_MyStore.Models;
+﻿using _24DH190272_MyStore;
+using _24DH190272_MyStore.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security; // Cần cho FormsAuthentication
-using _24DH190272_MyStore;
+using System.Data.Entity;
 
 namespace _24DH190272_MyStore.Controllers
 {
@@ -168,7 +170,7 @@ namespace _24DH190272_MyStore.Controllers
                     {
                         // Dựa vào ảnh: Areas -> Admin -> Views -> Home -> Index.cshtml
                         // Cú pháp: RedirectToAction("Action", "Controller", new { area = "TênArea" })
-                        return RedirectToAction("Index", "Products", new { area = "Admin" });
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
 
                     // TRƯỜNG HỢP 2: Nếu là Khách (Role C) -> Về trang chủ
@@ -242,6 +244,87 @@ namespace _24DH190272_MyStore.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+
+
+        // GET: Account/EditProfile
+        // Hiển thị form chỉnh sửa thông tin
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            // 1. Lấy Username của người dùng đã đăng nhập
+            string username = User.Identity.Name;
+
+            // 2. Lấy thông tin Customer hiện tại từ Database
+            var customer = db.Customers.FirstOrDefault(c => c.Username == username);
+
+            if (customer == null)
+            {
+                return HttpNotFound("Không tìm thấy thông tin khách hàng để chỉnh sửa.");
+            }
+
+            // 3. Trả về View với thông tin Customer hiện tại
+            return View(customer);
+        }
+
+        // POST: Account/EditProfile
+        // Xử lý lưu thông tin người dùng đã chỉnh sửa
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult EditProfile(Customer customerModel)
+        {
+            // 1. Kiểm tra tính hợp lệ của Model (các quy tắc [Required], Email,...)
+            if (ModelState.IsValid)
+            {
+                // 2. TÌM BẢN GHI HIỆN CÓ CẦN CẬP NHẬT
+                // Lấy lại username từ FormsAuthentication, KHÔNG DÙNG model.Username (vì nó có thể đã bị giả mạo/thay đổi)
+                string currentUsername = User.Identity.Name;
+
+                // Dùng FirstOrDefault vì ta chỉ cần tìm 1 Customer của Username đó
+                var existingCustomer = db.Customers.FirstOrDefault(c => c.Username == currentUsername);
+
+                if (existingCustomer != null)
+                {
+                    // 3. CẬP NHẬT THÔNG TIN: Gán dữ liệu mới từ Form (customerModel) vào bản ghi cũ (existingCustomer)
+                    existingCustomer.CustomerName = customerModel.CustomerName;
+                    existingCustomer.CustomerEmail = customerModel.CustomerEmail;
+                    existingCustomer.CustomerPhone = customerModel.CustomerPhone;
+                    existingCustomer.CustomerAddress = customerModel.CustomerAddress;
+
+                    // 4. Báo cho Entity Framework biết đối tượng này đã được sửa
+                    // Cần using System.Data.Entity;
+                    db.Entry(existingCustomer).State = EntityState.Modified;
+
+                    // 5. LƯU THAY ĐỔI VÀO DATABASE
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Xử lý lỗi khi lưu
+                        ModelState.AddModelError("", "Lỗi khi lưu thông tin: " + ex.Message);
+                        return View(customerModel);
+                    }
+
+                    // 6. THÔNG BÁO THÀNH CÔNG VÀ CHUYỂN HƯỚNG
+                    // Dùng TempData để gửi thông báo sang View khác
+                    TempData["SuccessMessage"] = "Hồ sơ cá nhân đã được cập nhật thành công!";
+
+                    // Chuyển hướng về trang ProfileInfo để load lại thông tin mới
+                    return RedirectToAction("ProfileInfo");
+                }
+                else
+                {
+                    // Trường hợp không tìm thấy Customer (lỗi hệ thống)
+                    ModelState.AddModelError("", "Lỗi hệ thống: Không tìm thấy hồ sơ của bạn.");
+                }
+            }
+
+            // Nếu Model không hợp lệ hoặc có lỗi, hiển thị lại Form
+            return View(customerModel);
         }
     }
 }

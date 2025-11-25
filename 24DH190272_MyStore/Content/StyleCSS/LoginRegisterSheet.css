@@ -98,19 +98,26 @@
         border-bottom: none;
     }
 
-/* 4. NÚT BẤM (FULL WIDTH - CHỮ TRẮNG) */
+/* 4. NÚT BẤM (FIX LỆCH CHỮ) */
 .authen-container .btn {
-    width: 100%; /* Full chiều rộng */
-    border-radius: 50px; /* Bo tròn */
-    padding: 12px 0;
-    font-size: 16px;
+    width: 100%; /* Giữ 100% để chia cột đều */
+    border-radius: 50px;
+    /* FIX: Thêm padding ngang (15px) và giữ padding dọc (12px) */
+    padding: 12px 15px;
+    /* FIX: Dùng Flexbox để căn giữa chữ tuyệt đối theo chiều dọc */
+    display: flex;
+    justify-content: center; /* Căn giữa ngang (cho chắc chắn) */
+    align-items: center; /* Căn giữa dọc */
+
+    font-size: 14px; /* Giảm font-size cho cân đối hơn */
     font-weight: bold;
     border: none;
-    color: #ffffff !important; /* Bắt buộc chữ trắng */
+    color: #ffffff !important;
     text-transform: uppercase;
     transition: 0.3s;
     margin-top: 10px;
     cursor: pointer;
+    /* text-align: center; <--- Bỏ cái này khi dùng Flexbox */
 }
 
 /* Nút Cam (Primary) */
@@ -151,3 +158,36 @@
         .authen-link a:hover {
             text-decoration: underline;
         }
+
+
+/* Cho khung bao ngoài để giới hạn width */
+.profile-container {
+    max-width: 600px;
+}
+
+/* Cho khung thông báo thành công */
+.alert-success-custom {
+    margin-top: 20px;
+    text-align: center;
+    color: #155724 !important;
+    background-color: #d4edda !important;
+    border-color: #c3e6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Cho nút Chỉnh sửa Hồ sơ (Màu nâu đậm) */
+.btn-profile-edit {
+    background-color: #795548;
+    box-shadow: 0 4px 10px rgba(121, 85, 72, 0.4);
+}
+
+    /* Đảm bảo nút Chỉnh sửa Hồ sơ không bị hover thành màu cam */
+    .btn-profile-edit:hover {
+        background-color: #6d4c41;
+    }
+
+/* Căn giữa nội dung trong mỗi cột để nút không bị lệch ngang (SỬ DỤNG TRONG HTML) */
+.authen-row .col-center {
+    text-align: center;
+}

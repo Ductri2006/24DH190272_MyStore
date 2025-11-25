@@ -1,18 +1,138 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    // Thiết lập tiêu đề trang cho thanh trình duyệt
+    ViewBag.Title = "BẢNG ĐIỀU KHIỂN QUẢN TRỊ";
+    // Sử dụng layout chính cho khu vực Admin
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!DOCTYPE html>
+<style>
+    /* Styling riêng cho Dashboard */
+    .dashboard-header {
+        color: #333;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+    }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Indexx</title>
-</head>
-<body>
-    <div> 
-        Trang chu admin
+    .stat-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+        text-align: center;
+        border-left: 5px solid;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-card .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .stat-card h3 {
+            font-size: 1.2rem;
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .stat-card p {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+    /* Màu sắc theo chức năng */
+    .card-categories {
+        border-left-color: #3f51b5; /* Xanh tím cho Danh mục */
+    }
+
+    .card-products {
+        border-left-color: #ff9800; /* Cam cho Sản phẩm */
+    }
+
+    .card-orders {
+        border-left-color: #4caf50; /* Xanh lá cho Đơn hàng */
+    }
+
+    .card-users {
+        border-left-color: #f44336; /* Đỏ cho Người dùng */
+    }
+</style>
+<h2 class="dashboard-header">
+    BẢNG ĐIỀU KHIỂN QUẢN TRỊ (ADMIN DASHBOARD)
+</h2>
+<p class="lead">Chào mừng bạn quay trở lại! Đây là tổng quan nhanh về các chức năng chính của hệ thống.</p>
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card card-categories">
+            <div class="icon" style="color: #3f51b5;">
+                <i class="fas fa-sitemap"></i>
+            </div>
+            <h3>Danh Mục Sản Phẩm</h3>
+            <p>@ViewBag.TotalCategories</p> 
+            <small class="text-muted">Tổng số danh mục</small>
+        </div>
     </div>
-</body>
-</html>
+
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card card-products">
+            <div class="icon" style="color: #ff9800;">
+                <i class="fas fa-boxes"></i>
+            </div>
+            <h3>Sản Phẩm</h3>
+            <p>@ViewBag.TotalProducts</p> 
+            <small class="text-muted">Tổng số sản phẩm</small>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card card-orders">
+            <div class="icon" style="color: #4caf50;">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>Đơn Hàng Mới</h3>
+            <p>@ViewBag.NewOrdersCount</p>
+            <small class="text-muted">Đơn hàng cần xử lý</small>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card card-users">
+            <div class="icon" style="color: #f44336;">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3>Khách Hàng</h3>
+            <p>@ViewBag.TotalCustomers</p>
+            <small class="text-muted">Tổng số tài khoản</small>
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="row mt-4">
+    <div class="col-12">
+        <h3>Truy Cập Nhanh</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Quản lý Danh mục (Thêm, Sửa, Xóa)
+                @Html.ActionLink("Đi tới", "Index", "Categories", new { area = "Admin" }, new { @class = "btn btn-sm btn-primary" })
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Quản lý Sản phẩm (Thêm mới, Xem chi tiết)
+                @Html.ActionLink("Đi tới", "Index", "Products", new { area = "Admin" }, new { @class = "btn btn-sm btn-primary" })
+            </li>
+        </ul>
+    </div>
+</div>

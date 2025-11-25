@@ -36,7 +36,7 @@ namespace _24DH190272_MyStore.Controllers
             model.FeaturedProducts = products
                 .OrderByDescending(p => p.OrderDetails.Count())
                 .Take(10)
-                .ToList();
+                .ToList();          
 
             // --- Lấy danh sách sản phẩm mới (có phân trang) ---
             model.NewProducts = products
