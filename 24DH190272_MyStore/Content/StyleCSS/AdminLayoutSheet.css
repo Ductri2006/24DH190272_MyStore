@@ -1,0 +1,100 @@
+﻿/* CSS GHI ĐÈ ĐÃ CHỈNH SỬA: Thay thế tông màu xanh/trắng bằng tông Cam Nhạt/Nền Sáng */
+
+/* 1. Navbar - Nền Cam Nhạt */
+/* Giả sử đây là class được áp dụng cho Navbar Layout Admin của bạn */
+.navbar-custom-light-orange {
+    /* Màu nền cam nhạt tương tự header chính */
+    background-color: #f7e4cd !important;
+    /* Viền dưới màu cam đậm hơn để phân cách */
+    border-bottom: 3px solid #f0ad4e;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Logo/Brand (My Store Admin) */
+.navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    /* Chuyển sang màu chữ đen đậm để nổi bật trên nền sáng */
+    color: #333333 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+    .navbar-brand:hover {
+        color: #e8a23d !important; /* Cam đậm hơn khi hover */
+    }
+
+/* 3. Khung chứa các mục điều hướng */
+.navbar-nav {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* 4. Mục Điều hướng (Danh Mục, Sản phẩm) - Thay đổi màu chữ và nền hover */
+/* GHI ĐÈ CSS CHO .nav-link ĐỂ TẠO HIỆU ỨNG BLOCK */
+.nav-link {
+    font-weight: 600;
+    font-size: 1.15rem !important;
+    color: #333333 !important; /* ĐỔI: Chữ màu đen */
+    /* LOẠI BỎ NỀN TRẮNG */
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0;
+    /* Giữ nguyên khoảng cách */
+    padding: 8px 15px !important;
+    margin: 0 8px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+    .nav-link:hover {
+        /* Nền hover màu cam nhạt hơn một chút */
+        background-color: #f4d9b3;
+        color: #333333 !important;
+        box-shadow: none;
+    }
+/* --- THAY ĐỔI STYLE CHO NÚT ĐĂNG XUẤT --- */
+.nav-logout {
+    font-weight: 700 !important;
+    color: #dc3545 !important; /* Màu đỏ nổi bật */
+    background-color: transparent !important; /* LOẠI BỎ NỀN TRẮNG */
+    box-shadow: none !important;
+    border: none; /* LOẠI BỎ VIỀN */
+    text-decoration: underline; /* Thêm gạch chân để dễ nhận biết là hành động */
+    padding: 8px 15px !important;
+    margin-left: 15px !important;
+}
+
+    .nav-logout:hover {
+        color: #ff0000 !important; /* Đỏ sáng hơn khi hover */
+        background-color: transparent !important;
+        text-decoration: underline;
+    }
+
+/* Loại bỏ class cũ (navbar-custom-blue) để tránh xung đột */
+.navbar-custom-blue {
+    background-color: transparent !important;
+    border-bottom: none !important;
+}
+
+/* 6. Footer - Giữ nguyên */
+footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    color: #6c757d;
+    text-align: center;
+}
+
+    footer h4 {
+        color: #e8a23d; /* Chuyển màu chân footer sang cam đậm */
+        margin-top: 10px;
+    }
+
+    footer p {
+        margin: 5px 0;
+        font-size: 0.9em;
+    }
