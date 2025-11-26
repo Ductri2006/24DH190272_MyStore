@@ -19,7 +19,7 @@ namespace _24DH190272_MyStore.Controllers
             var model = new HomeProductVM();
             var products = db.Products.AsQueryable();
 
-            // Nếu người dùng nhập từ khóa tìm kiếm
+            // 1. Tìm kiếm (Lọc sản phẩm trước)
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 model.SearchTerm = searchTerm;
@@ -28,15 +28,25 @@ namespace _24DH190272_MyStore.Controllers
                                                p.Category.CategoryName.Contains(searchTerm));
             }
 
-            // --- Phân trang ---
-            int pageNumber = page ?? 1;     // Trang hiện tại (mặc định là 1)
-            int pageSize = 6;               // Số sản phẩm mỗi trang
+            // 2. Đoạn này quan trọng: Cần lưu lại từ khóa để khi sang trang 2 không bị mất
+            ViewBag.SearchTerm = searchTerm;
 
-            // --- Lấy danh sách sản phẩm nổi bật ---
-            model.FeaturedProducts = products
+            // 3. Phân trang
+            int pageNumber = page ?? 1; // Nếu page null thì mặc định là 1
+            int pageSize = 6;           // Số sản phẩm mỗi trang
+
+            // 4. Lấy danh sách sản phẩm MỚI (Cần sắp xếp trước khi phân trang)
+            // Lưu ý: ToPagedList trả về kiểu IPagedList, không phải List thường
+            model.NewProducts = products
+                .OrderByDescending(p => p.ProductID) // Bắt buộc phải có OrderBy
+                .ToPagedList(pageNumber, pageSize);
+
+            // 5. Lấy danh sách sản phẩm NỔI BẬT (Logic riêng, không ảnh hưởng bởi phân trang của NewProducts)
+            // Thường thì sp nổi bật lấy theo tiêu chí khác, ví dụ bán chạy nhất
+            model.FeaturedProducts = db.Products // Lấy từ db gốc để tránh bị ảnh hưởng bởi bộ lọc tìm kiếm (tùy nhu cầu)
                 .OrderByDescending(p => p.OrderDetails.Count())
                 .Take(10)
-                .ToList();          
+                .ToList();
 
             // --- Lấy danh sách sản phẩm mới (có phân trang) ---
             model.NewProducts = products

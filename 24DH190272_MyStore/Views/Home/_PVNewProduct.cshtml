@@ -1,22 +1,52 @@
-﻿@model PagedList.IPagedList<_24DH190272_MyStore.Models.Product>
-@using PagedList.Mvc;
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<_24DH190272_MyStore.Models.Product>
 
-
+<div class="alert alert-info">
+    Bạn đang ở trang: <strong>@Model.PageNumber</strong> / Tổng số trang: <strong>@Model.PageCount</strong>
+</div>
 
 <div class="list-product">
     <h2 class="section-title">Sản Phẩm Mới</h2>
-    <div class="products-grid">
-        @* Dùng vòng lặp để hiển thị sản phẩm *@
-        @foreach (var item in Model)
+
+    <div class="row">
+        @if (Model != null && Model.Any())
         {
-            <div class="product-card">
-            </div>
+            foreach (var item in Model)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="thumbnail" style="height:350px; position:relative; margin-bottom: 20px;">
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID })">
+                            <img src="@item.ProductImage" alt="@item.ProductName" style="height:180px; width:100%; object-fit:contain; padding: 10px;" />
+                        </a>
+
+                        <div class="caption text-center">
+                            <h4 style="height: 40px; overflow: hidden;">
+                                <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID })">
+                                    @item.ProductName
+                                </a>
+                            </h4>
+                            <p class="price" style="color: red; font-weight: bold; font-size: 16px;">
+                                @String.Format("{0:N0}đ", item.ProductPrice)
+                            </p>
+
+                            <p>
+                                <a href="@Url.Action("ProductDetails", "Home", new { id = item.ProductID })" class="btn btn-warning btn-block">
+                                    Mua ngay
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="alert alert-warning">Không có sản phẩm nào trong trang này.</p>
         }
     </div>
 </div>
 
-<div class="pagination-container">
-    @* Gọi helper PagedListPager để tạo các nút phân trang *@
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchTerm = ViewBag.SearchTerm }))
+<div class="pagination-container text-center">
+    @Html.PagedListPager(Model, page => Url.Action("TrangChu", "Home", new { page = page, searchTerm = ViewBag.SearchTerm }))
 </div>
-

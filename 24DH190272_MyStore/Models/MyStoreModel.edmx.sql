@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/20/2025 21:42:35
--- Generated from EDMX file: D:\SQL_NĂM2\24DH190272_MyStore\24DH190272_MyStore\Models\MyStoreModel.edmx
+-- Date Created: 11/25/2025 22:19:00
+-- Generated from EDMX file: D:\SQL_NĂM2\bài web\24DH190272_MyStore\Models\MyStoreModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [MyStore];
+USE [BanDienThoai];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,20 +17,20 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_Pro_Category]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_Pro_Category];
-GO
 IF OBJECT_ID(N'[dbo].[FK__Order__CustomerI__412EB0B6]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK__Order__CustomerI__412EB0B6];
-GO
-IF OBJECT_ID(N'[dbo].[FK_User_Customer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_User_Customer];
 GO
 IF OBJECT_ID(N'[dbo].[FK__OrderDeta__Order__44FF419A]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK__OrderDeta__Order__44FF419A];
 GO
 IF OBJECT_ID(N'[dbo].[FK__OrderDeta__Produ__440B1D61]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OrderDetails] DROP CONSTRAINT [FK__OrderDeta__Produ__440B1D61];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Pro_Category]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Products] DROP CONSTRAINT [FK_Pro_Category];
+GO
+IF OBJECT_ID(N'[dbo].[FK_User_Customer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Customers] DROP CONSTRAINT [FK_User_Customer];
 GO
 
 -- --------------------------------------------------
@@ -43,11 +43,11 @@ GO
 IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Customers];
 GO
-IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Orders];
-GO
 IF OBJECT_ID(N'[dbo].[OrderDetails]', 'U') IS NOT NULL
     DROP TABLE [dbo].[OrderDetails];
+GO
+IF OBJECT_ID(N'[dbo].[Orders]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Orders];
 GO
 IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Products];
